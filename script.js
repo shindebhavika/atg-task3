@@ -1,83 +1,58 @@
-function submitForm() {
-  var button = document.querySelector('.button');
+document.addEventListener('click', function (event) {
+  var targetButton = event.target.closest('button');
+  if (targetButton) {
+    submitForm(targetButton);
+  }
+});
 
-  button.innerHTML = '<div class="loader"></div>Button';
-  button.disabled = true;
+function submitForm(button) {
+  var loaderClass = 'black-loader';
+  var sizeClass = '';
 
-  setTimeout(function () {
-    button.innerHTML = 'Submit';
-    button.disabled = false;
-  }, 2000);
-  setTimeout(function () {
-    button.disabled = true;
-  }, 2000);
+  if (button.classList.contains('primary')) {
+    loaderClass = 'white-loader';
+  } else if (button.classList.contains('quinary')) {
+    loaderClass = 'blue-loader';
+  }
 
-}
-function submitFormSecondary() {
-  var button = document.querySelector('.secondary');
+  button.innerHTML = `<div class="loader ${loaderClass}"></div>Button`;
 
-  button.innerHTML = '<div class="loader-secondary"></div>Button';
-  button.disabled = true;
+  if (button.classList.contains('button-large-size')) {
+    sizeClass = 'while-loading-l';
+  } else if (button.classList.contains('button-medium-size')) {
+    sizeClass = 'while-loading-m';
+  } else if (button.classList.contains('button-small-size')) {
+    sizeClass = 'while-loading-s';
+  }
 
-  setTimeout(function () {
-    button.innerHTML = 'Submit';
-    button.disabled = false;
-  }, 2000);
-  setTimeout(function () {
-    button.disabled = true;
-  }, 2000);
+  button.classList.add(sizeClass);
 
-}
-function submitFormTernary() {
-  var button = document.querySelector('.ternary');
-button.style.border="1px dashed rgba(217, 217, 217, 1)"
-  button.innerHTML = '<div class="loader-secondary loader-ternary"></div>Button';
-  button.disabled = true;
+  var originalClasses = [ 'white-icon', 'black-icon', 'dark-blue-icon', 'medium-blue-icon' ];
+  originalClasses.forEach(className => button.classList.remove(className));
 
   setTimeout(function () {
     button.innerHTML = 'Submit';
-    button.disabled = false;
-  }, 2000);
-  setTimeout(function () {
+    // button.disabled = false;
+
+    if (button.classList.contains('white')) {
+      button.classList.add('white-icon');
+    }
+    if (button.classList.contains('black')) {
+      button.classList.add('black-icon');
+    }
+    if (button.classList.contains('m-blue')) {
+      button.classList.add('medium-blue-icon');
+    }
+
+    button.classList.remove(sizeClass);
+
     button.disabled = true;
+    button.style.backgroundColor = 'rgba(245, 245, 245, 1)';
+    button.style.color = 'rgba(191, 191, 191, 1)';
   }, 2000);
 
-}
 
-function submitFormQuaternary() {
-  var button = document.querySelector('.quaternary');
-  // button.style.backgroundColor = 'rgba(217, 217, 217, 1)'
-  button.style.border = 'none'
-  button.innerHTML = '<div class="loader-quaternary "></div>Button';
-  button.disabled = true;
 
-  setTimeout(function () {
-    button.innerHTML = 'Submit';
 
-    button.disabled = false;
-
-  }, 2000);
-  setTimeout(function () {
-    button.disabled = true;
-  }, 2000);
-
-}
-
-function submitFormQuinary() {
-  var button = document.querySelector('.quinary');
-  // button.style.backgroundColor = 'rgba(217, 217, 217, 1)'
-  button.style.border = 'none'
-  button.innerHTML = '<div class="loader-quinary "></div>Button';
-  button.disabled = true;
-
-  setTimeout(function () {
-    button.innerHTML = 'Submit';
-
-    button.disabled = false;
-
-  }, 2000);
-  setTimeout(function () {
-    button.disabled = true;
-  }, 2000);
 
 }
