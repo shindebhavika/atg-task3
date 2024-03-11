@@ -32,7 +32,7 @@ function submitForm(button) {
 
   setTimeout(function () {
     button.innerHTML = 'Submit';
-    // button.disabled = false;
+ 
 
     if (button.classList.contains('white')) {
       button.classList.add('white-icon');
@@ -47,8 +47,22 @@ function submitForm(button) {
     button.classList.remove(sizeClass);
 
     button.disabled = true;
-    button.style.backgroundColor = 'rgba(245, 245, 245, 1)';
+  
+    if(button.classList.contains("primary")){
+      button.style.backgroundColor = 'rgba(245, 245, 245, 1)'
+    }
     button.style.color = 'rgba(191, 191, 191, 1)';
+
+    var originalClasses = [ 'white-icon', 'black-icon', 'dark-blue-icon', 'medium-blue-icon' ];
+    originalClasses.forEach(className => button.classList.remove(className));
+    if (
+      button.classList.contains("search-button-large") ||
+      button.classList.contains("search-button-medium") ||
+      button.classList.contains("search-button-small")
+    ) {
+      button.classList.add("disabled-icon");
+    }
+
   }, 2000);
 
 
